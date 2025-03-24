@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,53 +8,55 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Excel Comparison Tool</h1>
-        
+
         <div class="file-upload-section">
             <div class="file-upload">
                 <h2>File 1</h2>
                 <input type="file" id="file1" accept=".xlsx,.xls,.csv" />
             </div>
-            
+
             <div class="file-upload">
                 <h2>File 2</h2>
                 <input type="file" id="file2" accept=".xlsx,.xls,.csv" />
             </div>
-            
+
             <button id="load-data-btn" class="btn primary">Load Data</button>
         </div>
-        
+
         <div class="comparison-controls" id="comparison-section" style="display: none;">
             <h2>Column Mapping</h2>
             <p>Select columns to compare between the two files:</p>
-            
+
             <div class="column-mappings" id="column-mappings">
                 <div class="column-mapping-row">
                     <div class="column-select">
                         <label>File 1 Column:</label>
                         <select class="column1-select"></select>
                     </div>
-                    
+
                     <div class="comparison-operator">
                         <span>compared to</span>
                     </div>
-                    
+
                     <div class="column-select">
                         <label>File 2 Column:</label>
                         <select class="column2-select"></select>
                     </div>
-                    
+
                     <button class="remove-mapping-btn" title="Remove this mapping">×</button>
                 </div>
             </div>
-            
+
             <div class="mapping-controls">
                 <button id="add-mapping-btn" class="btn">Add Another Column Mapping</button>
+                <button id="export-btn" class="btn">Export Results to CSV</button>
                 <button id="compare-btn" class="btn primary">Compare Files</button>
             </div>
-            
+
             <div class="key-column-section">
                 <h3>Key Column for Matching Rows</h3>
                 <p>Select a column mapping to use as the key for matching rows between files:</p>
@@ -62,7 +65,7 @@
                 </select>
             </div>
         </div>
-        
+
         <div class="results-section" id="results-section" style="display: none;">
             <h2>Comparison Results</h2>
             <div class="stats">
@@ -72,7 +75,7 @@
                 <div id="unique-file1">Unique to File 1: <span>0</span></div>
                 <div id="unique-file2">Unique to File 2: <span>0</span></div>
             </div>
-            
+
             <div class="filter-controls">
                 <label>
                     <input type="checkbox" id="show-matches" checked> Show Matches
@@ -87,7 +90,6 @@
                     <input type="checkbox" id="show-unique-file2" checked> Show Unique to File 2
                 </label>
             </div>
-            
             <div class="results-table-container">
                 <table id="results-table">
                     <thead id="results-header">
@@ -102,14 +104,12 @@
                     </tbody>
                 </table>
             </div>
-            
-            <div class="export-section">
-                <button id="export-btn" class="btn">Export Results to CSV</button>
-            </div>
+
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
 </qodoArtifact>

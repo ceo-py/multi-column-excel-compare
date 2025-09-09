@@ -58,11 +58,11 @@ async function loadExcelFiles() {
     try {
         // Load file 1
         file1Data = await readExcelFile(file1Input.files[0]);
-        file1Columns = Object.keys(file1Data[0] || {});
+        file1Columns = getAllColumns(file1Data);
         
         // Load file 2
         file2Data = await readExcelFile(file2Input.files[0]);
-        file2Columns = Object.keys(file2Data[0] || {});
+        file2Columns = getAllColumns(file2Data);
         
         if (file1Columns.length === 0 || file2Columns.length === 0) {
             alert('One or both files appear to be empty');
@@ -96,7 +96,7 @@ function readExcelFile(file) {
                 const worksheet = workbook.Sheets[firstSheetName];
                 
                 // Convert to JSON
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 'A' });
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 'A', defval: '' });
                 
                 // If the first row contains headers, remove it and use as column names
                 if (jsonData.length > 0) {
@@ -126,6 +126,15 @@ function readExcelFile(file) {
         
         reader.readAsArrayBuffer(file);
     });
+}
+
+/**
+ * Build a column list from all rows (union of keys)
+ */
+function getAllColumns(data) {
+    const s = new Set();
+    data.forEach(r => Object.keys(r).forEach(k => s.add(k)));
+    return Array.from(s);
 }
 
 /**
